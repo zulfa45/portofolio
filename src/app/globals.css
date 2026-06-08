@@ -1,26 +1,181 @@
+/* src/app/globals.css */
+
+/* ✅ Tailwind v4: Ganti @tailwind directives dengan @import */
 @import "tailwindcss";
 
+/* ✅ Tailwind v4: Hubungkan ke config file kustom kita */
+@config "../../tailwind.config.ts";
+
+/* ===================================
+   CSS CUSTOM PROPERTIES (Variables)
+   =================================== */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-bg: #FFF8E7;
+  --color-bg-alt: #E8F4FD;
+  --color-text: #0D0D0D;
+  --color-text-muted: #4A4A4A;
+  --color-border: #0D0D0D;
+  --color-accent: #FFD60A;
+  --shadow-color: 0, 0, 0;
+  --neu-shadow: 4px 4px 0px 0px rgb(var(--shadow-color));
+  --neu-shadow-sm: 2px 2px 0px 0px rgb(var(--shadow-color));
+  --neu-shadow-lg: 8px 8px 0px 0px rgb(var(--shadow-color));
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.dark {
+  --color-bg: #0D0D0D;
+  --color-bg-alt: #1A1A1A;
+  --color-text: #F5F5F5;
+  --color-text-muted: #A0A0A0;
+  --color-border: #39FF14;
+  --color-accent: #F5FF00;
+  --shadow-color: 57, 255, 20;  /* #39FF14 dalam RGB */
+  --neu-shadow: 4px 4px 0px 0px rgb(var(--shadow-color));
+  --neu-shadow-sm: 2px 2px 0px 0px rgb(var(--shadow-color));
+  --neu-shadow-lg: 8px 8px 0px 0px rgb(var(--shadow-color));
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ===================================
+   BASE STYLES
+   =================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track {
+  background: var(--color-bg-alt);
+  border-left: 2px solid var(--color-border);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 0;
+}
+
+/* Selection */
+::selection {
+  background-color: var(--color-accent);
+  color: #0D0D0D;
+}
+
+/* ===================================
+   NEUBRUTALISM UTILITY CLASSES
+   ✅ Tailwind v4: @apply dark: tidak didukung.
+      Gunakan CSS variables yang sudah adaptive.
+   =================================== */
+@layer components {
+
+  /* Border — otomatis hitam (light) / neon-green (dark) via CSS var */
+  .neu-border {
+    border-width: 2px;
+    border-style: solid;
+    border-color: var(--color-border);
+  }
+
+  .neu-border-thick {
+    border-width: 4px;
+    border-style: solid;
+    border-color: var(--color-border);
+  }
+
+  /* Shadow adaptive */
+  .neu-shadow {
+    box-shadow: var(--neu-shadow);
+  }
+
+  .neu-shadow-sm {
+    box-shadow: var(--neu-shadow-sm);
+  }
+
+  .neu-shadow-lg {
+    box-shadow: var(--neu-shadow-lg);
+  }
+
+  /* Shadow pressed (untuk hover state) */
+  .neu-shadow-pressed {
+    box-shadow: 0px 0px 0px 0px rgb(var(--shadow-color));
+  }
+
+  /* Card */
+  .neu-card {
+    border-width: 4px;
+    border-style: solid;
+    border-color: var(--color-border);
+    box-shadow: var(--neu-shadow);
+    background-color: var(--color-bg-alt);
+    border-radius: 4px;
+    padding: 1rem;
+  }
+
+  /* Badge */
+  .neu-badge {
+    display: inline-flex;
+    align-items: center;
+    border-width: 2px;
+    border-style: solid;
+    border-color: var(--color-border);
+    box-shadow: var(--neu-shadow-sm);
+    font-weight: 700;
+    font-size: 0.875rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 2px;
+    background-color: var(--color-accent);
+    color: var(--color-text);
+  }
+
+  /* Section container */
+  .section-container {
+    max-width: 64rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  @media (min-width: 640px) {
+    .section-container {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .section-container {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+  }
+
+  /* Heading */
+  .neu-heading {
+    font-family: var(--font-display), serif;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    color: var(--color-text);
+  }
+
+  /* Underline aksen */
+  .neu-underline {
+    position: relative;
+    display: inline-block;
+  }
+
+  .neu-underline::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background-color: var(--color-accent);
+  }
 }
