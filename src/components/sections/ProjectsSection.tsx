@@ -125,6 +125,24 @@ const PROJECTS: Project[] = [
     featured: true,
     links: { github: "https://github.com/zulfa45/olympus-algorithm-simulator" },
   },
+  {
+    id: 7,
+    title: "SIPAWON",
+    subtitle: "Sistem Pelayanan Polres Wonogiri",
+    description:
+      "Platform 'Kantor Polisi Virtual' untuk mendigitalisasi layanan kepolisian. Memfasilitasi pembuatan SKCK Online, perpanjangan SIM/STNK, dan pelaporan terpadu. Dilengkapi Admin Panel komprehensif untuk verifikasi berkas dan cetak dokumen PDF resmi.",
+    tags: ["Laravel 12", "Tailwind CSS", "MySQL", "E-Government"],
+    category: ["Web"],
+    accent: "#D4AF37",
+    accentText: "#0D0D0D",
+    image: "/images/projects/project-7.jpg",
+    status: "Completed",
+    featured: true,
+    links: {
+      github:
+        "https://github.com/zulfa45/SIPAWON-Sistem-Pelayanan-Polres-Wonogiri-",
+    },
+  },
 ];
 
 const CATEGORIES: ProjectCategory[] = ["All", "Web", "Mobile", "IoT", "UI/UX"];
